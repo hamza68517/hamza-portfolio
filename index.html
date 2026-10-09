@@ -1,0 +1,1590 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hamza Ali — Web Developer & Digital Craftsman</title>
+    <meta
+      name="description"
+      content="Hamza Ali — Web Developer crafting fast, elegant, conversion-focused websites for founders, agencies, and small businesses worldwide."
+    />
+    <meta name="theme-color" content="#ffffff" />
+
+    <!-- ===== New font stack: Sora (display) + Manrope (body) ===== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Manrope", "ui-sans-serif", "system-ui"],
+              display: ["Sora", "ui-sans-serif", "system-ui"],
+              mono: ["JetBrains Mono", "monospace"],
+            },
+            colors: {
+              /* Royal blue palette */
+              royal: {
+                50: "#eef4ff",
+                100: "#dae6ff",
+                200: "#bcd1ff",
+                300: "#8eb3ff",
+                400: "#598aff",
+                500: "#3563ff",
+                600: "#2546e0",
+                700: "#1e35b8",
+                800: "#1e3096",
+                900: "#1e2d7a",
+                950: "#131c48",
+              },
+              /* Cool ink palette */
+              ink: {
+                50: "#f6f7f9",
+                100: "#eceef2",
+                200: "#d5d9e2",
+                300: "#b1b8c8",
+                400: "#8692a8",
+                500: "#68748d",
+                600: "#535d74",
+                700: "#444c5f",
+                800: "#3a4050",
+                900: "#1e2230",
+                950: "#12151e",
+              },
+              /* Accent */
+              sky: {
+                50: "#eff9ff",
+                100: "#def2ff",
+                200: "#b6e7ff",
+                300: "#75d6ff",
+                400: "#2cc2ff",
+                500: "#00a9f0",
+                600: "#0087ce",
+                700: "#006ba6",
+                800: "#085a89",
+                900: "#0d4a71",
+              },
+            },
+            keyframes: {
+              blob: {
+                "0%,100%": { transform: "translate(0px,0px) scale(1)" },
+                "33%": { transform: "translate(30px,-40px) scale(1.08)" },
+                "66%": { transform: "translate(-20px,20px) scale(0.95)" },
+              },
+              float: {
+                "0%,100%": { transform: "translateY(0px)" },
+                "50%": { transform: "translateY(-12px)" },
+              },
+              "gradient-x": {
+                "0%,100%": { backgroundPosition: "0% 50%" },
+                "50%": { backgroundPosition: "100% 50%" },
+              },
+              marquee: {
+                "0%": { transform: "translateX(0)" },
+                "100%": { transform: "translateX(-50%)" },
+              },
+              "spin-slow": {
+                "0%": { transform: "rotate(0deg)" },
+                "100%": { transform: "rotate(360deg)" },
+              },
+              "pulse-ring": {
+                "0%": { transform: "scale(1)", opacity: "0.5" },
+                "100%": { transform: "scale(1.8)", opacity: "0" },
+              },
+            },
+            animation: {
+              blob: "blob 14s infinite ease-in-out",
+              float: "float 6s ease-in-out infinite",
+              "gradient-x": "gradient-x 6s ease infinite",
+              marquee: "marquee 40s linear infinite",
+              "spin-slow": "spin-slow 22s linear infinite",
+              "pulse-ring":
+                "pulse-ring 2.8s cubic-bezier(0.16, 1, 0.3, 1) infinite",
+            },
+            boxShadow: {
+              soft: "0 20px 50px -15px rgba(18, 21, 30, 0.12)",
+              "soft-lg": "0 30px 70px -20px rgba(18, 21, 30, 0.18)",
+              royal: "0 20px 50px -15px rgba(37, 70, 224, 0.35)",
+              "royal-lg": "0 30px 70px -20px rgba(37, 70, 224, 0.45)",
+            },
+          },
+        },
+      };
+    </script>
+
+    <style type="text/tailwindcss">
+      @layer components {
+        /* Buttons */
+        .btn {
+          @apply inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-sm transition-all duration-300 whitespace-nowrap;
+        }
+        .btn-primary {
+          @apply btn text-white bg-royal-600 shadow-royal hover:bg-royal-700 hover:shadow-royal-lg hover:-translate-y-0.5;
+        }
+        .btn-outline {
+          @apply btn border-2 border-ink-900 text-ink-900 hover:bg-royal-600 hover:text-white hover:border-royal-600 hover:-translate-y-0.5;
+        }
+        .btn-ghost {
+          @apply btn text-ink-500 hover:text-royal-600 px-4;
+        }
+        .btn-sm {
+          @apply px-4 py-2.5 text-xs;
+        }
+        .btn-block {
+          @apply w-full;
+        }
+
+        /* Cards & glass */
+        .glass {
+          @apply bg-white/80 backdrop-blur-xl border border-ink-200/70;
+        }
+        .card-surface {
+          @apply bg-white border border-ink-200/70 rounded-2xl shadow-soft;
+        }
+
+        /* Section header */
+        .section-tag {
+          @apply inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-bold tracking-[0.18em] uppercase bg-royal-50 border border-royal-200 text-royal-700;
+        }
+        .section-title {
+          @apply font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-ink-950 mt-5 tracking-tight leading-[1.1];
+        }
+        .section-subtitle {
+          @apply text-ink-500 mt-4 text-base leading-relaxed;
+        }
+
+        /* Nav */
+        .nav-link {
+          @apply relative text-sm font-medium text-ink-600 hover:text-royal-600 transition-colors duration-300;
+        }
+        .nav-link::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: -6px;
+          height: 2px;
+          width: 0;
+          background: linear-gradient(90deg, #2546e0, #00a9f0);
+          transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .nav-link:hover::after,
+        .nav-link.active::after {
+          width: 100%;
+        }
+        .nav-link.active {
+          @apply text-royal-600;
+        }
+
+        /* Reveal */
+        .reveal {
+          @apply opacity-0 translate-y-10 transition-all duration-700 ease-out;
+        }
+        .reveal.active {
+          @apply opacity-100 translate-y-0;
+        }
+
+        /* Tag */
+        .tag {
+          @apply text-[11px] font-semibold px-3 py-1 rounded-full bg-royal-50 border border-royal-200 text-royal-700;
+        }
+
+        /* Gradient text */
+        .gradient-text {
+          @apply bg-gradient-to-r from-royal-600 via-royal-500 to-sky-500 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient-x;
+        }
+
+        /* Social button */
+        .social-btn {
+          @apply w-11 h-11 flex items-center justify-center rounded-full border border-ink-200 text-ink-500 hover:text-white hover:bg-royal-600 hover:border-royal-600 transition-all duration-300 hover:-translate-y-1;
+        }
+      }
+    </style>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body
+    class="bg-white text-ink-700 font-sans antialiased overflow-x-hidden selection:bg-royal-100 selection:text-royal-900"
+  >
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[999] focus:bg-royal-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg"
+      >Skip to main content</a
+    >
+
+    <!-- Cursor glow (desktop only) -->
+    <div
+      id="cursorGlow"
+      class="hidden lg:block pointer-events-none fixed top-0 left-0 w-[440px] h-[440px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-royal-300/25 via-sky-200/15 to-transparent blur-[90px] z-0 transition-transform duration-200 ease-out"
+    ></div>
+
+    <!-- ===================== NAVBAR ===================== -->
+    <header
+      id="navbar"
+      class="fixed top-0 inset-x-0 z-50 transition-all duration-300 border-b border-transparent"
+    >
+      <div
+        class="max-w-6xl mx-auto px-6 flex items-center justify-between h-20"
+      >
+        <a
+          href="#home"
+          class="font-display text-xl font-bold text-ink-950 tracking-tight flex items-center gap-2"
+        >
+          <span
+            class="w-8 h-8 rounded-lg bg-gradient-to-br from-royal-600 to-sky-500 flex items-center justify-center text-[11px] font-black text-white"
+            >HA</span
+          >
+          <span>Hamza<span class="gradient-text">.Ali</span></span>
+        </a>
+
+        <nav
+          id="navMenu"
+          aria-label="Primary navigation"
+          class="hidden lg:flex items-center gap-10"
+        >
+          <a href="#home" class="nav-link" data-nav>Home</a>
+          <a href="#about" class="nav-link" data-nav>About</a>
+          <a href="#skills" class="nav-link" data-nav>Toolkit</a>
+          <a href="#projects" class="nav-link" data-nav>Work</a>
+          <a href="#services" class="nav-link" data-nav>Services</a>
+          <a href="#contact" class="nav-link" data-nav>Contact</a>
+        </nav>
+
+        <div class="flex items-center gap-4">
+          <a
+            href="#contact"
+            class="btn-primary btn-sm hidden sm:inline-flex magnetic"
+            >Start a Project</a
+          >
+          <button
+            id="menuToggle"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+            aria-controls="mobileMenu"
+            class="lg:hidden relative w-9 h-9 flex items-center justify-center"
+          >
+            <span
+              id="bar1"
+              class="absolute block h-[2px] w-6 bg-ink-950 rounded-full transition-all duration-300 -translate-y-2"
+            ></span>
+            <span
+              id="bar2"
+              class="absolute block h-[2px] w-6 bg-ink-950 rounded-full transition-all duration-300"
+            ></span>
+            <span
+              id="bar3"
+              class="absolute block h-[2px] w-6 bg-ink-950 rounded-full transition-all duration-300 translate-y-2"
+            ></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile menu -->
+      <div
+        id="mobileMenu"
+        class="lg:hidden grid grid-rows-[0fr] transition-all duration-500 ease-in-out bg-white/98 backdrop-blur-xl border-b border-ink-200"
+      >
+        <div class="overflow-hidden">
+          <nav
+            class="flex flex-col px-6 pb-6 pt-2 gap-1"
+            aria-label="Mobile navigation"
+          >
+            <a href="#home" class="nav-link py-3" data-nav>Home</a>
+            <a href="#about" class="nav-link py-3" data-nav>About</a>
+            <a href="#skills" class="nav-link py-3" data-nav>Toolkit</a>
+            <a href="#projects" class="nav-link py-3" data-nav>Work</a>
+            <a href="#services" class="nav-link py-3" data-nav>Services</a>
+            <a href="#contact" class="nav-link py-3" data-nav>Contact</a>
+            <a href="#contact" class="btn-primary mt-3 justify-center"
+              >Start a Project</a
+            >
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- ===================== HERO ===================== -->
+      <section
+        id="home"
+        class="relative min-h-screen flex items-center pt-20 overflow-hidden"
+      >
+        <!-- Background blobs -->
+        <div class="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
+          <div
+            class="absolute -top-24 -right-20 w-[440px] h-[440px] bg-royal-200/40 rounded-full blur-[110px] animate-blob"
+          ></div>
+          <div
+            class="absolute -bottom-32 -left-24 w-[440px] h-[440px] bg-sky-200/40 rounded-full blur-[110px] animate-blob"
+            style="animation-delay: 3s"
+          ></div>
+          <div
+            class="absolute top-1/3 left-1/2 w-[340px] h-[340px] bg-royal-100/60 rounded-full blur-[110px] animate-blob"
+            style="animation-delay: 6s"
+          ></div>
+        </div>
+
+        <div
+          class="relative z-10 max-w-6xl mx-auto px-6 grid lg:grid-cols-[1.05fr_0.95fr] gap-14 items-center py-16 w-full"
+        >
+          <!-- LEFT: copy -->
+          <div class="reveal text-center lg:text-left order-2 lg:order-1">
+            <div
+              class="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full glass text-xs font-medium text-ink-600 shadow-sm"
+            >
+              <span class="relative flex h-2 w-2">
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"
+                ></span>
+                <span
+                  class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"
+                ></span>
+              </span>
+              Booking 2 new projects for Q1 2025
+            </div>
+
+            <p
+              class="font-mono text-xs uppercase tracking-[0.22em] text-royal-600 mb-5"
+            >
+              <span class="text-royal-500">✧</span> Web Developer · Digital
+              Craftsman
+            </p>
+
+            <h1
+              class="font-display text-4xl sm:text-5xl lg:text-[3.6rem] font-extrabold leading-[1.05] tracking-tight text-ink-950 mb-7"
+            >
+              I build websites that
+              <span class="gradient-text">turn visitors into customers.</span>
+            </h1>
+
+            <p
+              class="text-ink-500 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 mb-9 leading-relaxed"
+            >
+              Hey, I'm
+              <span class="text-ink-950 font-semibold">Hamza Ali</span> — a web
+              developer helping founders, agencies, and small businesses ship
+              fast, elegant, and revenue-driving digital experiences.
+            </p>
+
+            <div
+              class="flex flex-wrap items-center justify-center lg:justify-start gap-3 mb-10"
+            >
+              <a href="#projects" class="btn-primary magnetic"
+                >Explore My Work <i class="fa-solid fa-arrow-right"></i
+              ></a>
+              <a href="#contact" class="btn-outline magnetic"
+                >Book a Free Call</a
+              >
+            </div>
+
+            <div
+              class="flex items-center justify-center lg:justify-start gap-3"
+            >
+              <a href="#" class="social-btn" aria-label="GitHub">
+                <i class="fa-brands fa-github"></i>
+              </a>
+              <a href="#" class="social-btn" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin-in"></i>
+              </a>
+              <a href="#" class="social-btn" aria-label="Twitter / X">
+                <i class="fa-brands fa-x-twitter"></i>
+              </a>
+              <a href="#" class="social-btn" aria-label="Fiverr">
+                <i class="fa-brands fa-fiverr"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- RIGHT: profile picture + 3D scene -->
+          <div class="reveal relative order-1 lg:order-2">
+            <div class="relative w-full max-w-[480px] mx-auto">
+              <!-- Soft glow behind -->
+              <div
+                class="absolute -inset-8 bg-gradient-to-br from-royal-200/60 to-sky-200/40 rounded-full blur-3xl"
+                aria-hidden="true"
+              ></div>
+
+              <!-- Rotating dashed ring -->
+              <div
+                class="absolute inset-[-16px] rounded-full border-2 border-dashed border-royal-300/60 animate-spin-slow"
+                aria-hidden="true"
+              ></div>
+
+              <!-- Profile picture -->
+              <div
+                class="relative aspect-square rounded-full overflow-hidden border-4 border-white shadow-soft-lg bg-gradient-to-br from-royal-50 to-sky-50"
+              >
+                <img
+                  src="images/profile.png"
+                  alt="Portrait of Hamza Ali, Web Developer"
+                  class="w-full h-full object-cover"
+                  onerror="
+                    this.style.display = 'none';
+                    this.nextElementSibling.style.display = 'flex';
+                  "
+                />
+                <div
+                  class="w-full h-full hidden flex-col items-center justify-center gap-3 text-ink-400"
+                >
+                  <i class="fa-solid fa-user text-5xl text-royal-500"></i>
+                  <span class="font-mono text-xs">Add profile.png</span>
+                </div>
+              </div>
+
+              <!-- Available badge -->
+              <div
+                class="absolute -bottom-2 right-4 flex items-center gap-2 px-3.5 py-2 rounded-full bg-white border border-ink-200 shadow-soft-lg animate-float"
+              >
+                <span class="relative flex h-2 w-2">
+                  <span
+                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"
+                  ></span>
+                  <span
+                    class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"
+                  ></span>
+                </span>
+                <span
+                  class="font-mono text-[10px] font-semibold uppercase tracking-wider text-ink-700"
+                  >Available</span
+                >
+              </div>
+
+              <!-- Floating badges -->
+              <div
+                class="absolute -top-2 -left-6 flex items-center gap-2 px-3 py-2 rounded-full bg-white border border-ink-200 shadow-soft-lg animate-float"
+                style="animation-delay: 0.8s"
+              >
+                <i class="fa-brands fa-react text-sky-500 text-sm"></i>
+                <span class="font-mono text-[10px] font-semibold text-ink-700"
+                  >React</span
+                >
+              </div>
+              <div
+                class="absolute top-1/2 -right-10 flex items-center gap-2 px-3 py-2 rounded-full bg-white border border-ink-200 shadow-soft-lg animate-float"
+                style="animation-delay: 1.6s"
+              >
+                <i class="fa-brands fa-wordpress text-royal-600 text-sm"></i>
+                <span class="font-mono text-[10px] font-semibold text-ink-700"
+                  >WordPress</span
+                >
+              </div>
+              <div
+                class="absolute -bottom-4 -left-4 flex items-center gap-2 px-3 py-2 rounded-full bg-white border border-ink-200 shadow-soft-lg animate-float"
+                style="animation-delay: 2.4s"
+              >
+                <i class="fa-brands fa-js text-amber-500 text-sm"></i>
+                <span class="font-mono text-[10px] font-semibold text-ink-700"
+                  >JavaScript</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a
+          href="#about"
+          aria-label="Scroll to About section"
+          class="absolute bottom-8 left-1/2 -translate-x-1/2 w-10 h-10 rounded-full border border-ink-200 bg-white/70 backdrop-blur flex items-center justify-center text-ink-500 animate-bounce z-10"
+        >
+          <i class="fa-solid fa-chevron-down"></i>
+        </a>
+      </section>
+
+      <!-- ===================== ABOUT ===================== -->
+      <section id="about" class="py-28 bg-ink-50 relative">
+        <div class="max-w-6xl mx-auto px-6">
+          <div class="reveal text-center max-w-xl mx-auto mb-16">
+            <span class="section-tag">
+              <span class="w-1.5 h-1.5 rounded-full bg-royal-500"></span>
+              About Me
+            </span>
+            <h2 class="section-title">
+              Code with intent.<br />Design with care.
+            </h2>
+            <p class="section-subtitle">
+              I don't just build websites — I build the digital front doors of
+              ambitious businesses.
+            </p>
+          </div>
+
+          <div class="grid lg:grid-cols-[0.85fr_1.15fr] gap-12 items-center">
+            <!-- Left: quote card -->
+            <div class="reveal flex flex-col gap-6">
+              <div
+                class="relative w-full max-w-sm mx-auto lg:mx-0 rounded-[2rem] overflow-hidden border border-ink-200 bg-gradient-to-br from-royal-600 to-royal-800 shadow-soft-lg"
+              >
+                <div class="p-9">
+                  <i
+                    class="fa-solid fa-quote-left text-royal-200 text-3xl mb-6 block"
+                  ></i>
+                  <p class="text-base italic text-white leading-relaxed">
+                    "A great website isn't just pretty — it's the
+                    highest-leverage salesperson your business will ever have."
+                  </p>
+                  <div class="mt-6 flex items-center gap-3">
+                    <div
+                      class="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center text-white text-xs font-bold"
+                    >
+                      HA
+                    </div>
+                    <div>
+                      <p class="text-sm font-semibold text-white">Hamza Ali</p>
+                      <p
+                        class="font-mono text-[10px] uppercase tracking-wider text-royal-200"
+                      >
+                        Web Developer
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="grid grid-cols-3 gap-3 max-w-sm mx-auto lg:mx-0 w-full"
+              >
+                <div class="card-surface p-5 text-center">
+                  <p
+                    class="font-display text-2xl font-extrabold text-royal-600"
+                  >
+                    5+
+                  </p>
+                  <p
+                    class="font-mono text-[10px] uppercase tracking-wider text-ink-500 mt-1"
+                  >
+                    Years
+                  </p>
+                </div>
+                <div class="card-surface p-5 text-center">
+                  <p
+                    class="font-display text-2xl font-extrabold text-royal-600"
+                  >
+                    30+
+                  </p>
+                  <p
+                    class="font-mono text-[10px] uppercase tracking-wider text-ink-500 mt-1"
+                  >
+                    Projects
+                  </p>
+                </div>
+                <div class="card-surface p-5 text-center">
+                  <p
+                    class="font-display text-2xl font-extrabold text-royal-600"
+                  >
+                    100%
+                  </p>
+                  <p
+                    class="font-mono text-[10px] uppercase tracking-wider text-ink-500 mt-1"
+                  >
+                    Responsive
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: narrative -->
+            <div class="reveal">
+              <p class="text-ink-600 mb-5 leading-relaxed">
+                For the past
+                <span class="text-ink-950 font-semibold">5+ years</span>, I've
+                been helping founders, agencies, and small businesses launch
+                websites that actually move the needle. Every project starts
+                with the same question:
+                <span class="text-royal-600 font-medium italic"
+                  >"What outcome do you need this website to produce?"</span
+                >
+              </p>
+              <p class="text-ink-600 mb-8 leading-relaxed">
+                I handle the full front-end process — hand-coding responsive
+                layouts, building custom WordPress themes, and optimizing every
+                pixel for speed, accessibility, and conversion. From the first
+                wireframe to the final deploy, I stay involved.
+              </p>
+
+              <div class="grid sm:grid-cols-2 gap-4 mb-9">
+                <div class="flex items-start gap-3">
+                  <div
+                    class="w-6 h-6 rounded-full bg-royal-600 flex items-center justify-center flex-shrink-0 mt-0.5"
+                  >
+                    <i class="fa-solid fa-check text-white text-[10px]"></i>
+                  </div>
+                  <span class="text-ink-800 text-sm font-medium"
+                    >Mobile-first, every time</span
+                  >
+                </div>
+                <div class="flex items-start gap-3">
+                  <div
+                    class="w-6 h-6 rounded-full bg-royal-600 flex items-center justify-center flex-shrink-0 mt-0.5"
+                  >
+                    <i class="fa-solid fa-check text-white text-[10px]"></i>
+                  </div>
+                  <span class="text-ink-800 text-sm font-medium"
+                    >Clean, documented code</span
+                  >
+                </div>
+                <div class="flex items-start gap-3">
+                  <div
+                    class="w-6 h-6 rounded-full bg-royal-600 flex items-center justify-center flex-shrink-0 mt-0.5"
+                  >
+                    <i class="fa-solid fa-check text-white text-[10px]"></i>
+                  </div>
+                  <span class="text-ink-800 text-sm font-medium"
+                    >Obsessed with performance</span
+                  >
+                </div>
+                <div class="flex items-start gap-3">
+                  <div
+                    class="w-6 h-6 rounded-full bg-royal-600 flex items-center justify-center flex-shrink-0 mt-0.5"
+                  >
+                    <i class="fa-solid fa-check text-white text-[10px]"></i>
+                  </div>
+                  <span class="text-ink-800 text-sm font-medium"
+                    >Clear, jargon-free updates</span
+                  >
+                </div>
+              </div>
+
+              <a href="#contact" class="btn-primary magnetic"
+                >Let's Work Together <i class="fa-solid fa-arrow-right"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== SKILLS (marquee) ===================== -->
+      <section id="skills" class="py-28 relative overflow-hidden bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+          <div class="reveal text-center max-w-xl mx-auto mb-16">
+            <span class="section-tag">
+              <span class="w-1.5 h-1.5 rounded-full bg-royal-500"></span>
+              Toolkit
+            </span>
+            <h2 class="section-title">The stack I use every day.</h2>
+            <p class="section-subtitle">
+              A focused toolkit, refined over years of building real projects —
+              no hype, just what works.
+            </p>
+          </div>
+        </div>
+
+        <div class="relative reveal">
+          <div
+            class="absolute inset-y-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-white to-transparent z-10"
+          ></div>
+          <div
+            class="absolute inset-y-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-white to-transparent z-10"
+          ></div>
+
+          <div class="group overflow-hidden">
+            <div
+              class="flex gap-6 w-max animate-marquee group-hover:[animation-play-state:paused]"
+            >
+              <div class="flex gap-6 pr-6">
+                <div class="skill-card">
+                  <div class="skill-icon">
+                    <i class="fa-brands fa-html5"></i>
+                  </div>
+                  <h3>HTML5</h3>
+                </div>
+                <div class="skill-card">
+                  <div class="skill-icon">
+                    <i class="fa-brands fa-css3-alt"></i>
+                  </div>
+                  <h3>CSS3</h3>
+                </div>
+                <div class="skill-card">
+                  <div class="skill-icon"><i class="fa-brands fa-js"></i></div>
+                  <h3>JavaScript</h3>
+                </div>
+                <div class="skill-card">
+                  <div class="skill-icon"><i class="fa-solid fa-wind"></i></div>
+                  <h3>Tailwind CSS</h3>
+                </div>
+                <div class="skill-card">
+                  <div class="skill-icon">
+                    <i class="fa-brands fa-react"></i>
+                  </div>
+                  <h3>React</h3>
+                </div>
+                <div class="skill-card">
+                  <div class="skill-icon"><i class="fa-brands fa-php"></i></div>
+                  <h3>PHP</h3>
+                </div>
+                <div class="skill-card">
+                  <div class="skill-icon">
+                    <i class="fa-brands fa-wordpress"></i>
+                  </div>
+                  <h3>WordPress</h3>
+                </div>
+                <div class="skill-card">
+                  <div class="skill-icon">
+                    <i class="fa-solid fa-gauge-high"></i>
+                  </div>
+                  <h3>Performance</h3>
+                </div>
+              </div>
+              <div class="flex gap-6 pr-6" aria-hidden="true">
+                <div class="skill-card">
+                  <div class="skill-icon">
+                    <i class="fa-brands fa-html5"></i>
+                  </div>
+                  <h3>HTML5</h3>
+                </div>
+                <div class="skill-card">
+                  <div class="skill-icon">
+                    <i class="fa-brands fa-css3-alt"></i>
+                  </div>
+                  <h3>CSS3</h3>
+                </div>
+                <div class="skill-card">
+                  <div class="skill-icon"><i class="fa-brands fa-js"></i></div>
+                  <h3>JavaScript</h3>
+                </div>
+                <div class="skill-card">
+                  <div class="skill-icon"><i class="fa-solid fa-wind"></i></div>
+                  <h3>Tailwind CSS</h3>
+                </div>
+                <div class="skill-card">
+                  <div class="skill-icon">
+                    <i class="fa-brands fa-react"></i>
+                  </div>
+                  <h3>React</h3>
+                </div>
+                <div class="skill-card">
+                  <div class="skill-icon"><i class="fa-brands fa-php"></i></div>
+                  <h3>PHP</h3>
+                </div>
+                <div class="skill-card">
+                  <div class="skill-icon">
+                    <i class="fa-brands fa-wordpress"></i>
+                  </div>
+                  <h3>WordPress</h3>
+                </div>
+                <div class="skill-card">
+                  <div class="skill-icon">
+                    <i class="fa-solid fa-gauge-high"></i>
+                  </div>
+                  <h3>Performance</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== PROJECTS ===================== -->
+      <section id="projects" class="py-28 bg-ink-50">
+        <div class="max-w-6xl mx-auto px-6">
+          <div class="reveal text-center max-w-xl mx-auto mb-16">
+            <span class="section-tag">
+              <span class="w-1.5 h-1.5 rounded-full bg-royal-500"></span>
+              Selected Work
+            </span>
+            <h2 class="section-title">Real projects for real businesses.</h2>
+            <p class="section-subtitle">
+              A few recent builds — each one solved a specific problem around
+              speed, clarity, or conversion.
+            </p>
+          </div>
+
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 stagger">
+            <!-- Project 1 -->
+            <article class="reveal [perspective:1200px]">
+              <div
+                class="tilt-card bg-white border border-ink-200/70 rounded-3xl overflow-hidden transition-all duration-300 will-change-transform shadow-soft hover:shadow-soft-lg hover:border-royal-200"
+              >
+                <div
+                  class="aspect-[16/10] bg-ink-100 overflow-hidden relative group"
+                >
+                  <img
+                    src="images/project1.png"
+                    alt="Screenshot of Evertise agency landing page"
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    onerror="
+                      this.style.display = 'none';
+                      this.nextElementSibling.style.display = 'flex';
+                    "
+                  />
+                  <div
+                    class="w-full h-full hidden flex-col items-center justify-center gap-2 bg-gradient-to-br from-royal-50 to-sky-50 text-ink-400"
+                  >
+                    <i class="fa-solid fa-image text-3xl text-royal-500"></i>
+                    <span class="text-xs font-mono">Add project1.png</span>
+                  </div>
+                  <div
+                    class="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-ink-200/60"
+                  >
+                    <span
+                      class="w-1.5 h-1.5 rounded-full bg-emerald-500"
+                    ></span>
+                    <span
+                      class="font-mono text-[10px] font-semibold uppercase tracking-wider text-ink-700"
+                      >Live</span
+                    >
+                  </div>
+                </div>
+                <div class="p-7">
+                  <p
+                    class="font-mono text-[10px] uppercase tracking-widest text-royal-600 mb-2"
+                  >
+                    Project 01 · 2024
+                  </p>
+                  <h3 class="text-lg font-bold text-ink-950 mb-2 font-display">
+                    Evertise — Agency Landing Page
+                  </h3>
+                  <p class="text-ink-500 text-sm mb-5 leading-relaxed">
+                    A conversion-focused landing page for a digital agency. Cut
+                    load time from 4s to 0.9s and doubled qualified inquiries
+                    within 30 days.
+                  </p>
+                  <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="tag">HTML5</span>
+                    <span class="tag">CSS3</span>
+                    <span class="tag">JavaScript</span>
+                  </div>
+                  <a
+                    href="https://evertise.net/"
+                    target="_blank"
+                    rel="noopener"
+                    class="link-line inline-flex items-center gap-2 text-sm font-semibold text-ink-950 hover:text-royal-600 transition-colors"
+                  >
+                    View Project
+                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Project 2 -->
+            <article class="reveal [perspective:1200px]">
+              <div
+                class="tilt-card bg-white border border-ink-200/70 rounded-3xl overflow-hidden transition-all duration-300 will-change-transform shadow-soft hover:shadow-soft-lg hover:border-royal-200"
+              >
+                <div
+                  class="aspect-[16/10] bg-ink-100 overflow-hidden relative group"
+                >
+                  <img
+                    src="images/project2.png"
+                    alt="Screenshot of Creativa Negozio WooCommerce store"
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    onerror="
+                      this.style.display = 'none';
+                      this.nextElementSibling.style.display = 'flex';
+                    "
+                  />
+                  <div
+                    class="w-full h-full hidden flex-col items-center justify-center gap-2 bg-gradient-to-br from-royal-50 to-sky-50 text-ink-400"
+                  >
+                    <i class="fa-solid fa-image text-3xl text-royal-500"></i>
+                    <span class="text-xs font-mono">Add project2.png</span>
+                  </div>
+                  <div
+                    class="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-ink-200/60"
+                  >
+                    <span
+                      class="w-1.5 h-1.5 rounded-full bg-emerald-500"
+                    ></span>
+                    <span
+                      class="font-mono text-[10px] font-semibold uppercase tracking-wider text-ink-700"
+                      >Live</span
+                    >
+                  </div>
+                </div>
+                <div class="p-7">
+                  <p
+                    class="font-mono text-[10px] uppercase tracking-widest text-royal-600 mb-2"
+                  >
+                    Project 02 · 2024
+                  </p>
+                  <h3 class="text-lg font-bold text-ink-950 mb-2 font-display">
+                    Creativa Negozio — WooCommerce
+                  </h3>
+                  <p class="text-ink-500 text-sm mb-5 leading-relaxed">
+                    A custom WordPress + WooCommerce build for an Italian retail
+                    brand. Client now updates products and blog content without
+                    developer help.
+                  </p>
+                  <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="tag">WordPress</span>
+                    <span class="tag">PHP</span>
+                    <span class="tag">WooCommerce</span>
+                  </div>
+                  <a
+                    href="https://www.creativanegozio.com/"
+                    target="_blank"
+                    rel="noopener"
+                    class="link-line inline-flex items-center gap-2 text-sm font-semibold text-ink-950 hover:text-royal-600 transition-colors"
+                  >
+                    View Project
+                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Project 3 -->
+            <article class="reveal [perspective:1200px]">
+              <div
+                class="tilt-card bg-white border border-ink-200/70 rounded-3xl overflow-hidden transition-all duration-300 will-change-transform shadow-soft hover:shadow-soft-lg hover:border-royal-200"
+              >
+                <div
+                  class="aspect-[16/10] bg-ink-100 overflow-hidden relative group"
+                >
+                  <img
+                    src="images/project3.png"
+                    alt="Screenshot of Tyler Soffiantino portfolio"
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    onerror="
+                      this.style.display = 'none';
+                      this.nextElementSibling.style.display = 'flex';
+                    "
+                  />
+                  <div
+                    class="w-full h-full hidden flex-col items-center justify-center gap-2 bg-gradient-to-br from-royal-50 to-sky-50 text-ink-400"
+                  >
+                    <i class="fa-solid fa-image text-3xl text-royal-500"></i>
+                    <span class="text-xs font-mono">Add project3.png</span>
+                  </div>
+                  <div
+                    class="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-ink-200/60"
+                  >
+                    <span
+                      class="w-1.5 h-1.5 rounded-full bg-emerald-500"
+                    ></span>
+                    <span
+                      class="font-mono text-[10px] font-semibold uppercase tracking-wider text-ink-700"
+                      >Live</span
+                    >
+                  </div>
+                </div>
+                <div class="p-7">
+                  <p
+                    class="font-mono text-[10px] uppercase tracking-widest text-royal-600 mb-2"
+                  >
+                    Project 03 · 2024
+                  </p>
+                  <h3 class="text-lg font-bold text-ink-950 mb-2 font-display">
+                    Tyler Soffiantino — Portfolio
+                  </h3>
+                  <p class="text-ink-500 text-sm mb-5 leading-relaxed">
+                    A refined portfolio for a creative professional. Designed
+                    with a strong focus on typography, whitespace, and
+                    storytelling.
+                  </p>
+                  <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="tag">Tailwind</span>
+                    <span class="tag">JavaScript</span>
+                  </div>
+                  <a
+                    href="https://tylersoffiantino.org/"
+                    target="_blank"
+                    rel="noopener"
+                    class="link-line inline-flex items-center gap-2 text-sm font-semibold text-ink-950 hover:text-royal-600 transition-colors"
+                  >
+                    View Project
+                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                  </a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== SERVICES ===================== -->
+      <section id="services" class="py-28 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+          <div class="reveal text-center max-w-xl mx-auto mb-16">
+            <span class="section-tag">
+              <span class="w-1.5 h-1.5 rounded-full bg-royal-500"></span>
+              Services
+            </span>
+            <h2 class="section-title">
+              Ways I can move your business forward.
+            </h2>
+            <p class="section-subtitle">
+              Whether you need a brand-new site, a redesign, or a tune-up —
+              here's how I usually help.
+            </p>
+          </div>
+
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-7 stagger">
+            <!-- Service 1 -->
+            <div
+              class="reveal card-surface p-8 hover:-translate-y-2 hover:shadow-soft-lg hover:border-royal-200 transition-all duration-300"
+            >
+              <div
+                class="w-14 h-14 rounded-2xl bg-gradient-to-br from-royal-600 to-royal-800 flex items-center justify-center text-white text-xl mb-5"
+              >
+                <i class="fa-solid fa-code"></i>
+              </div>
+              <h3 class="text-ink-950 font-bold text-lg mb-2 font-display">
+                Custom Website Development
+              </h3>
+              <p class="text-ink-500 text-sm leading-relaxed mb-4">
+                Hand-coded, pixel-perfect websites built from scratch. Ideal if
+                you want something that doesn't look like a template.
+              </p>
+              <ul class="space-y-1.5">
+                <li class="flex items-center gap-2 text-xs text-ink-600">
+                  <i class="fa-solid fa-check text-royal-600 text-[10px]"></i>
+                  Fully responsive
+                </li>
+                <li class="flex items-center gap-2 text-xs text-ink-600">
+                  <i class="fa-solid fa-check text-royal-600 text-[10px]"></i>
+                  Optimized for speed
+                </li>
+                <li class="flex items-center gap-2 text-xs text-ink-600">
+                  <i class="fa-solid fa-check text-royal-600 text-[10px]"></i>
+                  SEO-ready
+                </li>
+              </ul>
+            </div>
+
+            <!-- Service 2 -->
+            <div
+              class="reveal card-surface p-8 hover:-translate-y-2 hover:shadow-soft-lg hover:border-royal-200 transition-all duration-300"
+            >
+              <div
+                class="w-14 h-14 rounded-2xl bg-gradient-to-br from-royal-600 to-royal-800 flex items-center justify-center text-white text-xl mb-5"
+              >
+                <i class="fa-brands fa-wordpress"></i>
+              </div>
+              <h3 class="text-ink-950 font-bold text-lg mb-2 font-display">
+                WordPress Development
+              </h3>
+              <p class="text-ink-500 text-sm leading-relaxed mb-4">
+                Custom WordPress themes and WooCommerce builds that you can
+                actually update yourself. No page-builder chaos.
+              </p>
+              <ul class="space-y-1.5">
+                <li class="flex items-center gap-2 text-xs text-ink-600">
+                  <i class="fa-solid fa-check text-royal-600 text-[10px]"></i>
+                  Custom theme
+                </li>
+                <li class="flex items-center gap-2 text-xs text-ink-600">
+                  <i class="fa-solid fa-check text-royal-600 text-[10px]"></i>
+                  Easy content editing
+                </li>
+                <li class="flex items-center gap-2 text-xs text-ink-600">
+                  <i class="fa-solid fa-check text-royal-600 text-[10px]"></i>
+                  WooCommerce ready
+                </li>
+              </ul>
+            </div>
+
+            <!-- Service 3 -->
+            <div
+              class="reveal card-surface p-8 hover:-translate-y-2 hover:shadow-soft-lg hover:border-royal-200 transition-all duration-300"
+            >
+              <div
+                class="w-14 h-14 rounded-2xl bg-gradient-to-br from-royal-600 to-royal-800 flex items-center justify-center text-white text-xl mb-5"
+              >
+                <i class="fa-solid fa-arrows-rotate"></i>
+              </div>
+              <h3 class="text-ink-950 font-bold text-lg mb-2 font-display">
+                Redesign & Modernization
+              </h3>
+              <p class="text-ink-500 text-sm leading-relaxed mb-4">
+                Have an outdated site that embarrasses you? I'll rebuild it into
+                something you're proud to share.
+              </p>
+              <ul class="space-y-1.5">
+                <li class="flex items-center gap-2 text-xs text-ink-600">
+                  <i class="fa-solid fa-check text-royal-600 text-[10px]"></i>
+                  Modern UI refresh
+                </li>
+                <li class="flex items-center gap-2 text-xs text-ink-600">
+                  <i class="fa-solid fa-check text-royal-600 text-[10px]"></i>
+                  Mobile optimization
+                </li>
+                <li class="flex items-center gap-2 text-xs text-ink-600">
+                  <i class="fa-solid fa-check text-royal-600 text-[10px]"></i>
+                  Content migration
+                </li>
+              </ul>
+            </div>
+
+            <!-- Service 4 -->
+            <div
+              class="reveal card-surface p-8 hover:-translate-y-2 hover:shadow-soft-lg hover:border-royal-200 transition-all duration-300"
+            >
+              <div
+                class="w-14 h-14 rounded-2xl bg-gradient-to-br from-royal-600 to-royal-800 flex items-center justify-center text-white text-xl mb-5"
+              >
+                <i class="fa-solid fa-bolt"></i>
+              </div>
+              <h3 class="text-ink-950 font-bold text-lg mb-2 font-display">
+                Landing Pages That Convert
+              </h3>
+              <p class="text-ink-500 text-sm leading-relaxed mb-4">
+                Focused, single-page builds designed around one action: getting
+                your visitor to click, buy, or sign up.
+              </p>
+              <ul class="space-y-1.5">
+                <li class="flex items-center gap-2 text-xs text-ink-600">
+                  <i class="fa-solid fa-check text-royal-600 text-[10px]"></i>
+                  Conversion-focused layout
+                </li>
+                <li class="flex items-center gap-2 text-xs text-ink-600">
+                  <i class="fa-solid fa-check text-royal-600 text-[10px]"></i>
+                  A/B test friendly
+                </li>
+                <li class="flex items-center gap-2 text-xs text-ink-600">
+                  <i class="fa-solid fa-check text-royal-600 text-[10px]"></i>
+                  Fast delivery
+                </li>
+              </ul>
+            </div>
+
+            <!-- Service 5 -->
+            <div
+              class="reveal card-surface p-8 hover:-translate-y-2 hover:shadow-soft-lg hover:border-royal-200 transition-all duration-300 sm:col-span-2 lg:col-span-1"
+            >
+              <div
+                class="w-14 h-14 rounded-2xl bg-gradient-to-br from-royal-600 to-royal-800 flex items-center justify-center text-white text-xl mb-5"
+              >
+                <i class="fa-solid fa-gauge-high"></i>
+              </div>
+              <h3 class="text-ink-950 font-bold text-lg mb-2 font-display">
+                Performance Optimization
+              </h3>
+              <p class="text-ink-500 text-sm leading-relaxed mb-4">
+                Improving load speed, structure, and Core Web Vitals on your
+                existing website — so it feels as good as it looks.
+              </p>
+              <ul class="space-y-1.5">
+                <li class="flex items-center gap-2 text-xs text-ink-600">
+                  <i class="fa-solid fa-check text-royal-600 text-[10px]"></i>
+                  Core Web Vitals
+                </li>
+                <li class="flex items-center gap-2 text-xs text-ink-600">
+                  <i class="fa-solid fa-check text-royal-600 text-[10px]"></i>
+                  Image & asset optimization
+                </li>
+                <li class="flex items-center gap-2 text-xs text-ink-600">
+                  <i class="fa-solid fa-check text-royal-600 text-[10px]"></i>
+                  Accessibility audit
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== PROCESS ===================== -->
+      <section id="process" class="py-28 bg-ink-50">
+        <div class="max-w-6xl mx-auto px-6">
+          <div class="reveal text-center max-w-xl mx-auto mb-20">
+            <span class="section-tag">
+              <span class="w-1.5 h-1.5 rounded-full bg-royal-500"></span>
+              Process
+            </span>
+            <h2 class="section-title">A workflow built on clarity.</h2>
+            <p class="section-subtitle">
+              No mystery, no endless email chains. Here's exactly how a project
+              unfolds from first hello to launch day.
+            </p>
+          </div>
+
+          <div
+            class="relative grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 stagger"
+          >
+            <div
+              class="hidden lg:block absolute top-9 left-[8%] right-[8%] h-px bg-gradient-to-r from-royal-200 via-royal-500 to-sky-300"
+            ></div>
+
+            <!-- Step 1 -->
+            <div class="reveal relative text-center">
+              <div
+                class="relative z-10 w-16 h-16 mx-auto rounded-2xl bg-white border-2 border-royal-100 shadow-sm flex items-center justify-center text-royal-600 text-xl mb-4"
+              >
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </div>
+              <span
+                class="block text-xs font-bold tracking-widest text-ink-400 mb-1 font-mono"
+                >01</span
+              >
+              <h3 class="text-ink-950 font-semibold mb-1 font-display">
+                Discovery
+              </h3>
+              <p class="text-ink-500 text-xs leading-relaxed">
+                Understanding your goals, audience, and what success looks like.
+              </p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="reveal relative text-center">
+              <div
+                class="relative z-10 w-16 h-16 mx-auto rounded-2xl bg-white border-2 border-royal-100 shadow-sm flex items-center justify-center text-royal-600 text-xl mb-4"
+              >
+                <i class="fa-solid fa-clipboard-list"></i>
+              </div>
+              <span
+                class="block text-xs font-bold tracking-widest text-ink-400 mb-1 font-mono"
+                >02</span
+              >
+              <h3 class="text-ink-950 font-semibold mb-1 font-display">
+                Strategy
+              </h3>
+              <p class="text-ink-500 text-xs leading-relaxed">
+                A clear proposal with deliverables, timeline, and price.
+              </p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="reveal relative text-center">
+              <div
+                class="relative z-10 w-16 h-16 mx-auto rounded-2xl bg-white border-2 border-royal-100 shadow-sm flex items-center justify-center text-royal-600 text-xl mb-4"
+              >
+                <i class="fa-solid fa-palette"></i>
+              </div>
+              <span
+                class="block text-xs font-bold tracking-widest text-ink-400 mb-1 font-mono"
+                >03</span
+              >
+              <h3 class="text-ink-950 font-semibold mb-1 font-display">
+                Design
+              </h3>
+              <p class="text-ink-500 text-xs leading-relaxed">
+                Wireframes then visuals. You review before code starts.
+              </p>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="reveal relative text-center">
+              <div
+                class="relative z-10 w-16 h-16 mx-auto rounded-2xl bg-white border-2 border-royal-100 shadow-sm flex items-center justify-center text-royal-600 text-xl mb-4"
+              >
+                <i class="fa-solid fa-laptop-code"></i>
+              </div>
+              <span
+                class="block text-xs font-bold tracking-widest text-ink-400 mb-1 font-mono"
+                >04</span
+              >
+              <h3 class="text-ink-950 font-semibold mb-1 font-display">
+                Build
+              </h3>
+              <p class="text-ink-500 text-xs leading-relaxed">
+                Clean, responsive code with progress updates every few days.
+              </p>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="reveal relative text-center">
+              <div
+                class="relative z-10 w-16 h-16 mx-auto rounded-2xl bg-white border-2 border-royal-100 shadow-sm flex items-center justify-center text-royal-600 text-xl mb-4"
+              >
+                <i class="fa-solid fa-vial"></i>
+              </div>
+              <span
+                class="block text-xs font-bold tracking-widest text-ink-400 mb-1 font-mono"
+                >05</span
+              >
+              <h3 class="text-ink-950 font-semibold mb-1 font-display">Test</h3>
+              <p class="text-ink-500 text-xs leading-relaxed">
+                Cross-browser, cross-device, performance testing.
+              </p>
+            </div>
+
+            <!-- Step 6 -->
+            <div class="reveal relative text-center">
+              <div
+                class="relative z-10 w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-royal-600 to-royal-800 shadow-sm flex items-center justify-center text-white text-xl mb-4"
+              >
+                <i class="fa-solid fa-rocket"></i>
+              </div>
+              <span
+                class="block text-xs font-bold tracking-widest text-royal-600 mb-1 font-mono"
+                >06</span
+              >
+              <h3 class="text-ink-950 font-semibold mb-1 font-display">
+                Launch
+              </h3>
+              <p class="text-ink-500 text-xs leading-relaxed">
+                Go live with 30 days of free support after handoff.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== CONTACT ===================== -->
+      <section id="contact" class="py-28 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+          <div class="reveal text-center max-w-xl mx-auto mb-16">
+            <span class="section-tag">
+              <span class="w-1.5 h-1.5 rounded-full bg-royal-500"></span>
+              Contact
+            </span>
+            <h2 class="section-title">Have a project in mind?</h2>
+            <p class="section-subtitle">
+              Tell me a bit about what you're building. I'll reply within 24
+              hours with honest thoughts on whether I'm the right fit.
+            </p>
+          </div>
+
+          <div class="grid lg:grid-cols-[0.85fr_1.15fr] gap-12">
+            <div class="reveal">
+              <h3 class="text-2xl font-bold text-ink-950 mb-4 font-display">
+                Let's talk
+              </h3>
+              <p class="text-ink-500 mb-8 leading-relaxed">
+                I'm currently open to freelance projects and long-term
+                collaborations. Reach out through the form or any channel below.
+              </p>
+
+              <div class="flex items-start gap-4 mb-6">
+                <div
+                  class="w-12 h-12 shrink-0 rounded-xl bg-royal-50 border border-royal-100 flex items-center justify-center text-royal-600"
+                >
+                  <i class="fa-solid fa-envelope"></i>
+                </div>
+                <div>
+                  <span
+                    class="block font-mono text-[10px] uppercase tracking-widest text-ink-400 mb-1"
+                    >Email</span
+                  >
+                  <a
+                    href="mailto:hamzaaalii685@gmail.com"
+                    class="text-ink-950 font-semibold hover:text-royal-600 transition-colors"
+                    >hamzaaalii685@gmail.com</a
+                  >
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4 mb-8">
+                <div
+                  class="w-12 h-12 shrink-0 rounded-xl bg-royal-50 border border-royal-100 flex items-center justify-center text-royal-600"
+                >
+                  <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <div>
+                  <span
+                    class="block font-mono text-[10px] uppercase tracking-widest text-ink-400 mb-1"
+                    >Location</span
+                  >
+                  <span class="text-ink-950 font-semibold"
+                    >Remote · Working with clients worldwide</span
+                  >
+                </div>
+              </div>
+
+              <div class="flex gap-3">
+                <a href="#" class="social-btn" aria-label="GitHub">
+                  <i class="fa-brands fa-github"></i>
+                </a>
+                <a href="#" class="social-btn" aria-label="LinkedIn">
+                  <i class="fa-brands fa-linkedin-in"></i>
+                </a>
+                <a href="#" class="social-btn" aria-label="Twitter / X">
+                  <i class="fa-brands fa-x-twitter"></i>
+                </a>
+                <a href="#" class="social-btn" aria-label="Fiverr">
+                  <i class="fa-brands fa-fiverr"></i>
+                </a>
+              </div>
+            </div>
+
+            <form
+              id="contactForm"
+              action="https://formspree.io/f/xeaegwnk"
+              novalidate
+              class="reveal bg-white border border-ink-200/70 rounded-3xl p-8 sm:p-10 shadow-soft"
+            >
+              <div class="mb-6">
+                <label
+                  for="name"
+                  class="block font-mono text-[10px] uppercase tracking-widest text-ink-500 mb-2"
+                  >Your Name</label
+                >
+                <input
+                  type="hidden"
+                  name="_subject"
+                  value="New message from your portfolio site"
+                />
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Jane Doe"
+                  autocomplete="name"
+                  class="w-full px-4 py-3.5 rounded-xl bg-ink-50 border border-ink-200 text-ink-950 placeholder:text-ink-400 focus:outline-none focus:border-royal-500 focus:ring-2 focus:ring-royal-100 transition-all"
+                />
+                <span
+                  class="error-message block min-h-[18px] text-red-600 text-xs mt-1.5"
+                  id="nameError"
+                ></span>
+              </div>
+              <div class="mb-6">
+                <label
+                  for="email"
+                  class="block font-mono text-[10px] uppercase tracking-widest text-ink-500 mb-2"
+                  >Email Address</label
+                >
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="jane@company.com"
+                  autocomplete="email"
+                  class="w-full px-4 py-3.5 rounded-xl bg-ink-50 border border-ink-200 text-ink-950 placeholder:text-ink-400 focus:outline-none focus:border-royal-500 focus:ring-2 focus:ring-royal-100 transition-all"
+                />
+                <span
+                  class="error-message block min-h-[18px] text-red-600 text-xs mt-1.5"
+                  id="emailError"
+                ></span>
+              </div>
+              <div class="mb-6">
+                <label
+                  for="message"
+                  class="block font-mono text-[10px] uppercase tracking-widest text-ink-500 mb-2"
+                  >Tell Me About Your Project</label
+                >
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="5"
+                  placeholder="What are you building? What outcome do you need? Any deadline?"
+                  class="w-full px-4 py-3.5 rounded-xl bg-ink-50 border border-ink-200 text-ink-950 placeholder:text-ink-400 focus:outline-none focus:border-royal-500 focus:ring-2 focus:ring-royal-100 transition-all resize-y"
+                ></textarea>
+                <span
+                  class="error-message block min-h-[18px] text-red-600 text-xs mt-1.5"
+                  id="messageError"
+                ></span>
+              </div>
+
+              <button type="submit" class="btn-primary btn-block magnetic">
+                Send Message <i class="fa-solid fa-paper-plane"></i>
+              </button>
+
+              <p
+                class="flex items-start gap-2 text-xs text-ink-400 mt-5 leading-relaxed"
+              >
+                <i class="fa-solid fa-circle-info text-royal-500 mt-0.5"></i>
+                Your message goes straight to my inbox. I reply to every inquiry
+                personally — usually within 24 hours.
+              </p>
+
+              <div
+                class="mt-4 text-sm font-semibold min-h-[20px]"
+                id="formStatus"
+                role="status"
+                aria-live="polite"
+              ></div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="bg-ink-950 text-ink-400 py-14">
+      <div class="max-w-6xl mx-auto px-6">
+        <div
+          class="flex flex-wrap items-center justify-between gap-6 pb-8 border-b border-white/10"
+        >
+          <a
+            href="#home"
+            class="font-display text-xl font-bold text-white flex items-center gap-2"
+          >
+            <span
+              class="w-8 h-8 rounded-lg bg-gradient-to-br from-royal-500 to-sky-500 flex items-center justify-center text-[11px] font-black text-white"
+              >HA</span
+            >
+            <span>Hamza<span class="text-royal-400">.Ali</span></span>
+          </a>
+          <ul class="flex flex-wrap gap-6 text-sm">
+            <li>
+              <a href="#home" class="hover:text-white transition-colors"
+                >Home</a
+              >
+            </li>
+            <li>
+              <a href="#about" class="hover:text-white transition-colors"
+                >About</a
+              >
+            </li>
+            <li>
+              <a href="#skills" class="hover:text-white transition-colors"
+                >Toolkit</a
+              >
+            </li>
+            <li>
+              <a href="#projects" class="hover:text-white transition-colors"
+                >Work</a
+              >
+            </li>
+            <li>
+              <a href="#services" class="hover:text-white transition-colors"
+                >Services</a
+              >
+            </li>
+            <li>
+              <a href="#contact" class="hover:text-white transition-colors"
+                >Contact</a
+              >
+            </li>
+          </ul>
+          <div class="flex gap-3">
+            <a
+              href="#"
+              class="w-9 h-9 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:bg-white/15 hover:text-white transition-all text-sm"
+              aria-label="GitHub"
+              ><i class="fa-brands fa-github"></i
+            ></a>
+            <a
+              href="#"
+              class="w-9 h-9 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:bg-white/15 hover:text-white transition-all text-sm"
+              aria-label="LinkedIn"
+              ><i class="fa-brands fa-linkedin-in"></i
+            ></a>
+            <a
+              href="#"
+              class="w-9 h-9 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:bg-white/15 hover:text-white transition-all text-sm"
+              aria-label="Twitter / X"
+              ><i class="fa-brands fa-x-twitter"></i
+            ></a>
+          </div>
+        </div>
+        <div class="pt-6 flex flex-wrap justify-between items-center gap-4">
+          <p class="text-ink-500 text-sm">
+            &copy; <span id="year"></span> Hamza Ali. All rights reserved.
+          </p>
+          <p
+            class="font-mono text-[10px] uppercase tracking-widest text-ink-500"
+          >
+            Built with <span class="text-royal-400">♥</span> & clean code
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <button
+      id="backToTop"
+      aria-label="Back to top"
+      class="fixed bottom-7 right-7 w-12 h-12 rounded-full bg-royal-600 text-white flex items-center justify-center shadow-royal-lg opacity-0 invisible translate-y-4 transition-all duration-300 z-40 hover:bg-royal-700"
+    >
+      <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+  </body>
+</html>
